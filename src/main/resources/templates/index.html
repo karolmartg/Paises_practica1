@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Práctica 1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/estilo1.css">
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <h2>Listado de Países</h2>
+        <hr>
+        <a th:href="@{/pais/nuevo}">Nuevo Pais</a>
+        
+        <div th:if="${paises != null and paises != empty}">
+            <table border="0">
+                <thead>
+                    <tr>
+                        <th>Nombre estado</th>
+                        <th>Capital</th>
+                        <th>Población</th>
+                        <th>Costas</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr th:each="pais: ${paises}">
+                        <td>[[${pais.nombre_estado}]]</td>
+                        <td>[[${pais.capital}]]</td>
+                        <td>[[${pais.poblacion}]]</td>
+                        <td>[[${pais.costas}]]</td>
+                        <td>
+                            <a th:href="@{/pais/eliminar/} + ${pais.idEstado}">Eliminar</a>
+                            <a th:href="@{/pais/modificar/} + ${pais.idEstado}">Modificar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div th:if="${pais == null or pais.empty}">
+            <h2>No tenemos datos que mostrar...</h2>
+        </div>
+    </body>
+</html>
